@@ -17,7 +17,7 @@ app.set('view engine','hbs');
 app.use(express.static(__dirname+'/public'));
 app.use((request,response,next)=>{
     var time=new Date().toString();
-    var log=`${time}:${request.method}:${request.url}`;
+    var log=`${time}:${request.method}:${request.url}:${request.hostname}:${request.ip}`;
     console.log(log);
     next();
 });
@@ -29,7 +29,7 @@ app.use((request,response,next)=>{
 
 app.get('/',(request,response)=>{
     response.render('home.hbs',{
-        WelcomeMessage:"Welcome to JPL-7 Official Website",
+        WelcomeMessage:"Welcome to JPL-7 Official Website"
     });
 });
 
@@ -41,6 +41,10 @@ app.get('/bad',(request,response)=>{
     response.send({
         error:"Unable to Connect to API servers"
     });
+});
+
+app.get('/modules',(request,response)=>{
+    response.render('modules.hbs');
 });
 
 app.listen(port,()=>{
