@@ -5,6 +5,14 @@ var app=express();
 
 var port=process.env.PORT || 3000;
 
+//How to add a route 
+//how to register Helpers as they can be used anywhere in the app(They act like Global Variables).
+//How to add static pages in the public folder.
+//the public always contains static **
+//How to add views folder so that we can store hbs files we can make them dynamic and render it to display them.
+//How to add partials and use them in the hbs files.Make it easier to code. No redundant coding. 
+//How to add maintenance to the app
+
 hbs.registerPartials(__dirname+'/views/partials');
 hbs.registerHelper('currentYear',()=>{
     return new Date().getFullYear();
@@ -17,7 +25,7 @@ app.set('view engine','hbs');
 app.use(express.static(__dirname+'/public'));
 app.use((request,response,next)=>{
     var time=new Date().toString();
-    var log=`${time}:${request.method}:${request.url}:${request.hostname}:${request.ip}`;
+    var log=`${time}:${request.method}:${request.url}:${request.hostname}:${request.ip}:${request.ips}`;    
     console.log(log);
     next();
 });
